@@ -1,2 +1,2 @@
-# readverse
+# ReadVerse
 Study Material Web Application
