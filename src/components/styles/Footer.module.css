@@ -1,0 +1,8 @@
+.crFooter {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #212529;
+    color: rgba(255, 255, 255, 0.25);
+}

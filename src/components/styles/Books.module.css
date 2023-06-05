@@ -1,0 +1,117 @@
+/* .mainBook {
+    width: 100%;
+    height: calc(100% - 106px);
+    overflow-x: hidden;
+    padding: 0px !important;
+} */
+
+.cardDeck {
+    /* height: 100%;
+    width: 100%; */
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: center;
+}
+
+.card {
+    height: 480px !important;
+    width: 350px;
+    margin: 40px 15px 15px;
+
+    background-color: rgba(255, 255, 255, 0.759);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+    /* transition: transform 0.5s ease-in-out; */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.cardAdd {
+    height: 480px !important;
+    width: 350px;
+    margin: 40px 15px 15px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.cardAddBody {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+}
+
+.cardAdd:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+}
+
+.cardImage {
+    height: 232px;
+    width: 348px;
+}
+
+.cardLikeView {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    padding: 5px 20px 5px 20px;
+    margin-top: -34px;
+    background-color: #212529;
+    color: white;
+    opacity: 80%;
+    backdrop-filter: blur(2px);
+}
+
+.cardLikeButton {
+    padding: 0px !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.cardLikeViewBlock {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cardLikeViewIcon {
+    cursor: pointer;
+}
+
+.cardText {
+    /* height: 120px;
+    width: 300px;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
+    width: 100%;
+    /* text-align: justify; */
+    /* overflow: hidden; */
+    /* display: -webkit-box; */
+    /* -webkit-line-clamp: 5; */
+    /* -webkit-box-orient: vertical; */
+}
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+}
+
+.footerBtn {
+    padding: 4px !important;
+}
+
+.cardBody {
+    overflow-y: auto;
+}

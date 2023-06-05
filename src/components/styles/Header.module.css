@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'DancingScript';
+    src: url('../../assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf')
+        format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar {
+    height: 56px; /* set the desired height of the Navbar */
+    line-height: 56px; /* set the line-height to match the height of the Navbar */
+}
+
+.headerTitle {
+    font-family: 'DancingScript', sans-serif;
+    font-size: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.searchForm {
+    display: flex;
+    width: 50%;
+}
+
+.searchBtn {
+    margin-right: 10px;
+    height: 30px;
+}
+
+.searchbar {
+    border-radius: 3px !important;
+    height: 30px;
+}
+
+.userMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #212529;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 2px;
+}
+
+.userImage {
+    height: 120px;
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+
+.userBtn {
+    width: 100%;
+}
+
+.userLink {
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--bs-navbar-color);
+}
+
+.userLink:hover {
+    color: var(--bs-navbar-hover-color);
+}
+
+.userLink:active {
+    color: var(--bs-navbar-active-color);
+}
+
+.tooltip {
+    visibility: hidden;
+    width: max-content !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px 16px;
+    border-radius: 3px;
+    font-size: 90%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    will-change: opacity, visibility;
+}

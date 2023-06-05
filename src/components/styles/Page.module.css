@@ -1,0 +1,173 @@
+:root {
+    --md-editor-height: 50px;
+    --pageLayout-padding-x: 0px;
+    --page-padding-x: 40px;
+    --page-padding-y: 25px;
+    --editor-padding-x: 40px;
+    --editor-padding-y: 35px;
+}
+
+.page {
+    height: calc(100vh - 96px);
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    height: calc(100% - 50px);
+    display: flex;
+    padding: 40px;
+    gap: 30px;
+}
+
+/* .editorWrapper {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 !important;
+    direction: rlt;
+} */
+
+.editor {
+    flex: 1;
+    height: 100%;
+    resize: none;
+    color: white;
+    padding: 2em;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: #212529ee;
+    box-shadow: inset 0 0 10px #000000;
+    font-size: 16px;
+}
+
+.previewContainer {
+    /* height: 100%; */
+    flex: 1;
+    overflow: auto;
+    background-color: #212529ee;
+    padding: 2em;
+    border-radius: 10px;
+    color: white;
+    box-shadow: inset 0 0 20px #000000;
+}
+
+.preview {
+    /* flex: 1; */
+}
+
+/* .editor {
+    height: 100%;
+    width: 100%;
+    background: transparent !important;
+    font-size: 16px !important;
+    resize: none;
+    border: none;
+    outline: none;
+    direction: ltr;
+    overflow: hidden;
+} */
+
+/* .editorWrapper {
+    height: 80% !important;
+    overflow-y: scroll;
+    direction: rtl;
+
+    padding-left: var(--page-padding-x) !important;
+    padding-right: var(--page-padding-x) !important;
+    padding-top: var(--page-padding-y) !important;
+    padding-bottom: var(--page-padding-y) !important;
+} */
+
+.header {
+    display: flex;
+    width: 100%;
+    height: var(--md-editor-height);
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    /* border: 4px solid white; */
+    box-shadow: 0px 2px 8px #000000;
+}
+
+.header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+}
+
+.box1 {
+    background-color: red;
+    height: 100% !important;
+    width: 100%;
+    padding: 10px;
+    /* margin: 10px; */
+    overflow: auto;
+    direction: rtl;
+}
+
+.box2 {
+    background-color: blue;
+    height: 120%;
+    width: 100%;
+    direction: ltr;
+}
+
+.box3 {
+    background-color: red;
+    height: 100% !important;
+    width: 100%;
+    /* padding: 10px; */
+    /* margin: 10px; */
+    overflow: auto;
+    /* direction: rtl; */
+}
+
+.box4 {
+    background-color: blue;
+    height: 120%;
+    width: 100%;
+    /* direction: ltr; */
+}
+
+.toc {
+    width: 30vw;
+    /* flex: 0.5; */
+    color: #fff;
+    border-radius: 10px;
+    background: #212529ee;
+    box-shadow: inset 0 0 10px #000000;
+}
+
+.tocList {
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    padding: 2em;
+}
+
+.tocLink {
+    color: rgba(255, 255, 255, 0.25) !important;
+    font-size: 16px !important;
+    transition: 0.3s !important;
+}
+
+.tocNav {
+    display: flex;
+    flex-direction: column;
+}
+
+.tocLink:hover {
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 18px !important;
+}
+
+.activeToc {
+    color: #fff !important;
+}
+
+.activeToc:hover {
+    color: #fff !important;
+}

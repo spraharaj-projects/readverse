@@ -1,0 +1,55 @@
+.labroot {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+}
+
+.ligh{
+    color:#fff;
+}
+
+#card-ac1 {
+    height: 10px;
+    border: 1px solid black;
+    background-color: #fff;
+    /* opacity: 0; */
+    margin-bottom: 150px;
+}
+#card-ac2 {
+    height: 10px;
+    border: 1px solid black;
+    background-color: #fff;
+    /* opacity: 0; */
+    margin-bottom: 350px;
+}
+#card-ac3 {
+    height: 10px;
+    border: 1px solid black;
+    background-color: #fff;
+    /* opacity: 0; */
+    margin-bottom: 250px;
+}
+#card-ac4 {
+    height: 10px;
+    border: 1px solid black;
+    background-color: #fff;
+    /* opacity: 0; */
+    margin-bottom: 550px;
+}
+
+.mar {
+    position: relative;
+
+    margin-top: 10px;
+    margin-left: 100px;
+    height: 200px;
+    /* width: 100%; */
+    background-color: red;
+}
+
+.card-show {
+    opacity: 1;
+}
+.loot{
+    padding-top: 20%;
+}
