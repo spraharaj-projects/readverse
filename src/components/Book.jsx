@@ -226,7 +226,7 @@ const Book = ({ searchQuery }) => {
                 <UpdatePage
                     show={showUpdatePage}
                     setShow={setShowUpdatePage}
-                    book={book}
+                    bookId={book.id}
                     pageId={selectedId}
                     page={selectedPage}
                     setSelectedId={setSelectedId}

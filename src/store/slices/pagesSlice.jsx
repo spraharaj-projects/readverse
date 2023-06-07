@@ -144,6 +144,7 @@ export const addPageAsync = (bookId, page) => async (dispatch) => {
 
 export const updatePageAsync =
     (bookId, pageId, updatedFields) => async (dispatch) => {
+        console.log(bookId, pageId, updatedFields);
         dispatch(intiateProcess());
         try {
             const bookDocRef = doc(db, 'books', bookId);
@@ -152,6 +153,7 @@ export const updatePageAsync =
             const pageDoc = await getDoc(pageDocRef);
             if (pageDoc.exists()) {
                 const currentPage = pageDoc.data();
+
                 if (
                     updatedFields.name &&
                     updatedFields.name !== currentPage.name
@@ -177,6 +179,7 @@ export const updatePageAsync =
                 await updateDoc(pageDocRef, updatedPage);
                 updatedPage.id = pageId;
                 dispatch(updatePage(updatedPage));
+
                 return { type: updatePage.type, payload: updatedPage };
             } else {
                 throw new Error(`Page with name ${page.name} not exists.`);

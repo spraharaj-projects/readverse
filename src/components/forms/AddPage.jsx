@@ -41,7 +41,7 @@ const AddPage = ({ show, setShow, bookId }) => {
 
     const validationSchema = Yup.object().shape({
         name: Yup.string()
-            .min(5, 'Name must be at least 5 characters')
+            .min(2, 'Name must be at least 2 characters')
             .matches(
                 /^[\w\s'"-]+$/,
                 'Name can only contain letters, numbers, underscores, hyphens, single quotes, double quotes and spaces'
