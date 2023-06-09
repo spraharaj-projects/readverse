@@ -49,36 +49,36 @@ const PageHeader = ({
                     <ButtonGroup size="sm">
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('BOLD');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'BOLD');
                             }}>
                             <FaBold />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('ITALIC');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'ITALIC');
                             }}>
                             <FaItalic />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('STRIKETHROUGH');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'STRIKETHROUGH');
                             }}>
                             <FaStrikethrough />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('UNDERLINE');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'UNDERLINE');
                             }}>
                             <FaUnderline />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('HR');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'HR');
                             }}>
                             <MdHorizontalRule />
                         </Button>
@@ -93,8 +93,8 @@ const PageHeader = ({
                                 as={Button}
                                 variant="light"
                                 style={{ fontSize: 26 }}
-                                onClick={() => {
-                                    handleButtonsClick('TITLE1');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'TITLE1');
                                 }}>
                                 Title
                             </Dropdown.Item>
@@ -102,8 +102,8 @@ const PageHeader = ({
                                 as={Button}
                                 variant="light"
                                 style={{ fontSize: 24 }}
-                                onClick={() => {
-                                    handleButtonsClick('TITLE2');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'TITLE2');
                                 }}>
                                 Title
                             </Dropdown.Item>
@@ -111,8 +111,8 @@ const PageHeader = ({
                                 as={Button}
                                 variant="light"
                                 style={{ fontSize: 22 }}
-                                onClick={() => {
-                                    handleButtonsClick('TITLE3');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'TITLE3');
                                 }}>
                                 Title
                             </Dropdown.Item>
@@ -120,8 +120,8 @@ const PageHeader = ({
                                 as={Button}
                                 variant="light"
                                 style={{ fontSize: 20 }}
-                                onClick={() => {
-                                    handleButtonsClick('TITLE4');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'TITLE4');
                                 }}>
                                 Title
                             </Dropdown.Item>
@@ -129,16 +129,16 @@ const PageHeader = ({
                                 as={Button}
                                 variant="light"
                                 style={{ fontSize: 18 }}
-                                onClick={() => {
-                                    handleButtonsClick('TITLE5');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'TITLE5');
                                 }}>
                                 Title
                             </Dropdown.Item>
                             <Dropdown.Item
                                 as={Button}
                                 variant="light"
-                                onClick={() => {
-                                    handleButtonsClick('TITLE6');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'TITLE6');
                                 }}>
                                 Title
                             </Dropdown.Item>
@@ -147,36 +147,36 @@ const PageHeader = ({
                     <ButtonGroup size="sm">
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('LINK');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'LINK');
                             }}>
                             <FaLink />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('QUOTE');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'QUOTE');
                             }}>
                             <FaQuoteRight />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('CODE');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'CODE');
                             }}>
                             <FaCode />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('COMMENT');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'COMMENT');
                             }}>
                             <BiCommentDetail />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('IMAGE');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'IMAGE');
                             }}>
                             <FaRegImage />
                         </Button>
@@ -191,48 +191,48 @@ const PageHeader = ({
                             <Dropdown.Item
                                 as={Button}
                                 variant="light"
-                                onClick={() => {
-                                    handleButtonsClick('CODEBLOCK');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'CODEBLOCK');
                                 }}>
                                 General
                             </Dropdown.Item>
                             <Dropdown.Item
                                 as={Button}
                                 variant="light"
-                                onClick={() => {
-                                    handleButtonsClick('CODEBLOCK-PY');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'CODEBLOCK-PY');
                                 }}>
                                 Python
                             </Dropdown.Item>
                             <Dropdown.Item
                                 as={Button}
                                 variant="light"
-                                onClick={() => {
-                                    handleButtonsClick('CODEBLOCK-JAVA');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'CODEBLOCK-JAVA');
                                 }}>
                                 Java
                             </Dropdown.Item>
                             <Dropdown.Item
                                 as={Button}
                                 variant="light"
-                                onClick={() => {
-                                    handleButtonsClick('CODEBLOCK-HTML');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'CODEBLOCK-HTML');
                                 }}>
                                 HTML
                             </Dropdown.Item>
                             <Dropdown.Item
                                 as={Button}
                                 variant="light"
-                                onClick={() => {
-                                    handleButtonsClick('CODEBLOCK-CSS');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'CODEBLOCK-CSS');
                                 }}>
                                 CSS
                             </Dropdown.Item>
                             <Dropdown.Item
                                 as={Button}
                                 variant="light"
-                                onClick={() => {
-                                    handleButtonsClick('CODEBLOCK-JS');
+                                onClick={(e) => {
+                                    handleButtonsClick(e, 'CODEBLOCK-JS');
                                 }}>
                                 JS
                             </Dropdown.Item>
@@ -242,22 +242,22 @@ const PageHeader = ({
                     <ButtonGroup size="sm">
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('UOLIST');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'UOLIST');
                             }}>
                             <FaListUl />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('ORLIST');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'ORLIST');
                             }}>
                             <FaListOl />
                         </Button>
                         <Button
                             variant="dark"
-                            onClick={() => {
-                                handleButtonsClick('CHECKLIST');
+                            onClick={(e) => {
+                                handleButtonsClick(e, 'CHECKLIST');
                             }}>
                             <FaTasks />
                         </Button>

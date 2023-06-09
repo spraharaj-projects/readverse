@@ -144,7 +144,6 @@ export const addPageAsync = (bookId, page) => async (dispatch) => {
 
 export const updatePageAsync =
     (bookId, pageId, updatedFields) => async (dispatch) => {
-        console.log(bookId, pageId, updatedFields);
         dispatch(intiateProcess());
         try {
             const bookDocRef = doc(db, 'books', bookId);

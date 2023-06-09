@@ -1,173 +1,192 @@
 import { v5 as uuidv5 } from 'uuid';
 
+const selectionEdit = (result, prefix, suffix) => {
+    const page = result.page;
+    const startPos = result.startPos;
+    const endPos = result.endPos;
+    const selection = page.slice(startPos, endPos);
+    suffix = suffix ?? prefix;
+    const n1 = prefix.length;
+    const n2 = suffix.length;
+    if (
+        selection.length >= n1 + n2 &&
+        selection.startsWith(prefix) &&
+        selection.endsWith(suffix)
+    ) {
+        result.page =
+            page.slice(0, startPos) +
+            page.slice(startPos + n1, endPos - n2) +
+            page.slice(endPos);
+        result.endPos = endPos - (n1 + n2);
+    } else {
+        result.page =
+            page.slice(0, startPos) +
+            prefix +
+            page.slice(startPos, endPos) +
+            suffix +
+            page.slice(endPos);
+        if (startPos === endPos) {
+            result.startPos = startPos + n1;
+            result.endPos = endPos + n1;
+        } else {
+            result.endPos = endPos + (n1 + n2);
+        }
+    }
+    return result;
+};
+
+const breaklineEdit = (result, prefix) => {
+    const page = result.page;
+    const startPos = result.startPos;
+    const endPos = result.endPos;
+    const breakline =
+        Math.max(
+            page.slice(0, startPos).lastIndexOf('\n'),
+            page.slice(0, startPos).lastIndexOf('\r')
+        ) + 1;
+    const n = prefix.length;
+    result.page = page.slice(0, breakline) + prefix + page.slice(breakline);
+    result.startPos = startPos + n;
+    result.endPos = endPos + n;
+    return result;
+};
+
 export const addPlaceholder = (type, page, startPos, endPos) => {
-    let newPage = page;
+    let result = {
+        page,
+        startPos,
+        endPos
+    };
+    let breakline =
+        Math.max(
+            page.slice(0, startPos).lastIndexOf('\n'),
+            page.slice(0, startPos).lastIndexOf('\r')
+        ) + 1;
     switch (type) {
         case 'BOLD':
-            newPage =
-                page.slice(0, startPos) +
-                '**' +
-                page.slice(startPos, endPos) +
-                '**' +
-                page.slice(endPos);
-
-            return newPage;
+            result = selectionEdit(result, '**');
+            break;
         case 'ITALIC':
-            newPage =
-                page.slice(0, startPos) +
-                '*' +
-                page.slice(startPos, endPos) +
-                '*' +
-                page.slice(endPos);
-
-            return newPage;
+            result = selectionEdit(result, '*');
+            break;
         case 'STRIKETHROUGH':
-            newPage =
-                page.slice(0, startPos) +
-                '~~' +
-                page.slice(startPos, endPos) +
-                '~~' +
-                page.slice(endPos);
-
-            return newPage;
+            result = selectionEdit(result, '~~');
+            break;
         case 'UNDERLINE':
-            newPage =
-                page.slice(0, startPos) +
-                '<u>' +
-                page.slice(startPos, endPos) +
-                '</u>' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '<u>', '</u>');
+            break;
         case 'HR':
-            newPage = page.slice(0, startPos) + '---' + page.slice(startPos);
-            return newPage;
+            result = breaklineEdit(result, '---\n');
+            break;
         case 'TITLE1':
-            newPage = page.slice(0, startPos) + '#' + page.slice(startPos);
-            return newPage;
+            result = breaklineEdit(result, '# ');
+            break;
         case 'TITLE2':
-            newPage = page.slice(0, startPos) + '##' + page.slice(startPos);
-            return newPage;
+            result = breaklineEdit(result, '## ');
+            break;
         case 'TITLE3':
-            newPage = page.slice(0, startPos) + '###' + page.slice(startPos);
-            return newPage;
+            result = breaklineEdit(result, '### ');
+            break;
         case 'TITLE4':
-            newPage = page.slice(0, startPos) + '####' + page.slice(startPos);
-            return newPage;
+            result = breaklineEdit(result, '#### ');
+            break;
         case 'TITLE5':
-            newPage = page.slice(0, startPos) + '#####' + page.slice(startPos);
-            return newPage;
+            result = breaklineEdit(result, '##### ');
+            break;
         case 'TITLE6':
-            newPage = page.slice(0, startPos) + '######' + page.slice(startPos);
-            return newPage;
+            result = breaklineEdit(result, '###### ');
+            break;
         case 'LINK':
-            newPage =
-                page.slice(0, startPos) +
-                '[' +
-                page.slice(startPos, endPos) +
-                ']()' +
-                page.slice(endPos);
-            return newPage;
+            if (startPos === endPos) {
+                result.page =
+                    page.slice(0, startPos) +
+                    '[enter text here](enter link here)' +
+                    page.slice(endPos);
+                result.startPos = startPos + 1;
+                result.endPos = endPos + 16;
+            } else {
+                result.page =
+                    page.slice(0, startPos) +
+                    '[' +
+                    page.slice(startPos, endPos) +
+                    '](enter link here)' +
+                    page.slice(endPos);
+                result.startPos = endPos + 3;
+                result.endPos = endPos + 18;
+            }
+            break;
         case 'QUOTE':
-            let breakline =
-                Math.max(
-                    page.slice(0, startPos).lastIndexOf('\n'),
-                    page.slice(0, startPos).lastIndexOf('\r')
-                ) + 1;
-            newPage = page.slice(0, breakline) + '> ' + page.slice(breakline);
-            return newPage;
+            result = breaklineEdit(result, '> ');
+            break;
         case 'CODE':
-            newPage =
-                page.slice(0, startPos) +
-                '`' +
-                page.slice(startPos, endPos) +
-                '`' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '`');
+            break;
         case 'CODEBLOCK':
-            newPage =
-                page.slice(0, startPos) +
-                '\n~~~\n' +
-                page.slice(startPos, endPos) +
-                '\n~~~\n' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '\n~~~\n');
+            break;
         case 'CODEBLOCK-PY':
-            newPage =
-                page.slice(0, startPos) +
-                '\n~~~python\n' +
-                page.slice(startPos, endPos) +
-                '\n~~~\n' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '\n~~~python\n', '\n~~~\n');
+            break;
         case 'CODEBLOCK-JAVA':
-            newPage =
-                page.slice(0, startPos) +
-                '\n~~~java\n' +
-                page.slice(startPos, endPos) +
-                '\n~~~\n' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '\n~~~java\n', '\n~~~\n');
+            break;
         case 'CODEBLOCK-HTML':
-            newPage =
-                page.slice(0, startPos) +
-                '\n~~~html\n' +
-                page.slice(startPos, endPos) +
-                '\n~~~\n' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '\n~~~html\n', '\n~~~\n');
+            break;
         case 'CODEBLOCK-CSS':
-            newPage =
-                page.slice(0, startPos) +
-                '\n~~~css\n' +
-                page.slice(startPos, endPos) +
-                '\n~~~\n' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '\n~~~css\n', '\n~~~\n');
+            break;
         case 'CODEBLOCK-JS':
-            newPage =
-                page.slice(0, startPos) +
-                '\n~~~js\n' +
-                page.slice(startPos, endPos) +
-                '\n~~~\n' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '\n~~~js\n', '\n~~~\n');
+            break;
         case 'COMMENT':
-            newPage =
-                page.slice(0, startPos) +
-                '<!--' +
-                page.slice(startPos, endPos) +
-                '-->' +
-                page.slice(endPos);
-            return newPage;
+            result = selectionEdit(result, '<!--', '-->');
+            break;
         case 'IMAGE':
-            newPage =
-                page.slice(0, startPos) +
-                '![' +
-                page.slice(startPos, endPos) +
-                ']()' +
-                page.slice(endPos);
-            return newPage;
+            if (startPos === endPos) {
+                result.page =
+                    page.slice(0, startPos) +
+                    '![alt text](image url here)' +
+                    page.slice(endPos);
+                result.startPos = startPos + 2;
+                result.endPos = endPos + 10;
+            } else {
+                result.page =
+                    page.slice(0, startPos) +
+                    '![' +
+                    page.slice(startPos, endPos) +
+                    '](enter link here)' +
+                    page.slice(endPos);
+                result.startPos = endPos + 4;
+                result.endPos = endPos + 19;
+            }
+            break;
         case 'UOLIST':
-            newPage =
+            result.page =
                 page.slice(0, startPos) +
                 '\n* Line 1\n* Line 2\n* Line 3\n' +
                 page.slice(startPos);
-            return newPage;
+            result.startPos = startPos + 3;
+            result.endPos = endPos + 9;
+            break;
         case 'ORLIST':
-            newPage =
+            result.page =
                 page.slice(0, startPos) +
                 '\n1. Line 1\n2. Line 2\n3. Line 3\n' +
                 page.slice(startPos);
-            return newPage;
+            result.startPos = startPos + 4;
+            result.endPos = endPos + 10;
+            break;
         case 'CHECKLIST':
-            newPage =
+            result.page =
                 page.slice(0, startPos) +
                 '\n- [ ] Line 1\n- [ ] Line 2\n- [x] Line 3\n' +
                 page.slice(startPos);
-            return newPage;
-        default:
-            return page;
+            result.startPos = startPos + 7;
+            result.endPos = endPos + 13;
+            break;
     }
+    return result;
 };
 
 export const getAgoTime = (updatedOn) => {

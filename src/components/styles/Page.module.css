@@ -56,6 +56,37 @@
     /* flex: 1; */
 }
 
+.preview blockquote {
+    padding: 1rem 0.5rem 0.5rem 2rem;
+    margin: 0 0 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-left: 0.2rem green solid;
+    background: #1d2022;
+}
+
+.preview h1 {
+    font-size: 32px;
+}
+.preview h2 {
+    font-size: 28px;
+}
+.preview h3 {
+    font-size: 24px;
+}
+.preview h4 {
+    font-size: 22px;
+}
+.preview h5 {
+    font-size: 20px;
+}
+.preview h6 {
+    font-size: 18px;
+}
+.preview p {
+    font-size: 18px;
+}
+
 /* .editor {
     height: 100%;
     width: 100%;

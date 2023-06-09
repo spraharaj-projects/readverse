@@ -31,7 +31,6 @@ const UpdatePage = ({
     };
 
     const handleSubmit = (values, { setSubmitting }) => {
-        console.log(bookId);
         if (page.name === values.name && page.shortDesc === values.shortDesc) {
             handleClose();
             return;

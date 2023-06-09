@@ -42,16 +42,24 @@ const Page = () => {
     const tocRef = useRef(null);
     const observerRef = useRef(null);
 
-    const handleButtonsClick = (type) => {
+    const handleButtonsClick = (event, type) => {
+        event.preventDefault();
         if (!editorRef.current) {
             return;
         }
         const textarea = editorRef.current;
         const startPos = textarea.selectionStart;
         const endPos = textarea.selectionEnd;
-
-        const newMarkdown = addPlaceholder(type, markdown, startPos, endPos);
-        setMarkdown(newMarkdown);
+        
+        const result = addPlaceholder(type, markdown, startPos, endPos);
+        setMarkdown(result.page);
+        setTimeout(() => {
+            // Restore the cursor position
+            textarea.focus({
+                preventScroll: true
+            });
+            textarea.setSelectionRange(result.startPos, result.endPos);
+        }, 0);
     };
 
     const handleUpload = () => {
@@ -283,7 +291,6 @@ const Page = () => {
                     onScroll={handlePreviewScroll}>
                     <ReactMarkdown
                         className={styles.preview}
-                        escapeHtml={false}
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={[rehypeRaw]}
                         children={DOMPurify.sanitize(markdown)}
@@ -320,6 +327,7 @@ const Page = () => {
                                     return (
                                         header.line ===
                                             node.position.start.line &&
+                                        children &&
                                         header.text === children[0]
                                     );
                                 });
@@ -334,6 +342,7 @@ const Page = () => {
                                     return (
                                         header.line ===
                                             node.position.start.line &&
+                                        children &&
                                         header.text === children[0]
                                     );
                                 });
@@ -348,6 +357,7 @@ const Page = () => {
                                     return (
                                         header.line ===
                                             node.position.start.line &&
+                                        children &&
                                         header.text === children[0]
                                     );
                                 });
@@ -362,6 +372,7 @@ const Page = () => {
                                     return (
                                         header.line ===
                                             node.position.start.line &&
+                                        children &&
                                         header.text === children[0]
                                     );
                                 });
@@ -376,6 +387,7 @@ const Page = () => {
                                     return (
                                         header.line ===
                                             node.position.start.line &&
+                                        children &&
                                         header.text === children[0]
                                     );
                                 });
@@ -390,6 +402,7 @@ const Page = () => {
                                     return (
                                         header.line ===
                                             node.position.start.line &&
+                                        children &&
                                         header.text === children[0]
                                     );
                                 });
