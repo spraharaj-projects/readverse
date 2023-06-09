@@ -66,6 +66,7 @@ const Page = () => {
                     setHistory([markdown]);
                     setCurrentIndex(0);
                     setToc(getToc(markdown));
+                    setEditable(false);
                 })
                 .catch((error) => {
                     toast.error('Unable to update. Error: ' + error.message);
@@ -73,6 +74,7 @@ const Page = () => {
                 .finally(setIsSaving(false));
         } else {
             setIsSaving(false);
+            setEditable(false);
         }
     };
 
@@ -151,6 +153,10 @@ const Page = () => {
         if (event.key === 'y' && (event.ctrlKey || event.metaKey)) {
             event.preventDefault();
             redo();
+        }
+        if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+            event.preventDefault();
+            handleUpload();
         }
     };
 

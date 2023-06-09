@@ -280,7 +280,6 @@ const PageHeader = ({
                     <Button
                         variant="dark"
                         onClick={() => {
-                            setEditable(false);
                             handleUpload();
                         }}
                         disabled={isSaving}>
