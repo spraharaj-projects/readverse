@@ -116,7 +116,10 @@ const Page = () => {
             setMarkdown(
                 markdown.substring(0, start) + '\t' + markdown.substring(end)
             );
-            event.target.setSelectionRange(start + 1, start + 1);
+            setTimeout(() => {
+                // Restore the cursor position
+                event.target.setSelectionRange(start + 1, start + 1);
+            }, 0);
         }
     };
 
