@@ -21,8 +21,9 @@ import { toast } from 'react-toastify';
 import { doc, getDoc } from 'firebase/firestore';
 
 const Page = () => {
-    const [originalMarkdown, setOriginalMarkdown] = useState('');
     const [markdown, setMarkdown] = useState('');
+    const [history, setHistory] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(-1);
     const [searchParams] = useSearchParams();
     const [editable, setEditable] = useState(
         searchParams.get('view') === 'edit'
@@ -55,14 +56,15 @@ const Page = () => {
 
     const handleUpload = () => {
         setIsSaving(true);
-        if (markdown !== originalMarkdown) {
+        if (markdown !== history[0]) {
             const fileRef = ref(storage, `${bookId}/${pageId}.md`);
             const metadata = { contentType: 'text/markdown' };
             const blob = new Blob([markdown], { type: 'text/markdown' });
             uploadBytes(fileRef, blob, metadata)
                 .then(() => {
                     toast.success(`${pageData.name} updated successfully`);
-                    setOriginalMarkdown(markdown);
+                    setHistory([markdown]);
+                    setCurrentIndex(0);
                     setToc(getToc(markdown));
                 })
                 .catch((error) => {
@@ -107,6 +109,27 @@ const Page = () => {
         }
     };
 
+    const handleChange = (e) => {
+        const newHistory = history.slice(0, currentIndex + 1);
+        setHistory([...newHistory, e.target.value]);
+        setCurrentIndex(currentIndex + 1);
+        setMarkdown(e.target.value);
+    };
+
+    const undo = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+            setMarkdown(history[currentIndex - 1]);
+        }
+    };
+
+    const redo = () => {
+        if (currentIndex < history.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+            setMarkdown(history[currentIndex + 1]);
+        }
+    };
+
     const handleKeyDown = (event) => {
         if (event.key === 'Tab' && !event.ctrlKey) {
             event.preventDefault();
@@ -120,6 +143,14 @@ const Page = () => {
                 // Restore the cursor position
                 event.target.setSelectionRange(start + 1, start + 1);
             }, 0);
+        }
+        if (event.key === 'z' && (event.ctrlKey || event.metaKey)) {
+            event.preventDefault();
+            undo();
+        }
+        if (event.key === 'y' && (event.ctrlKey || event.metaKey)) {
+            event.preventDefault();
+            redo();
         }
     };
 
@@ -138,7 +169,8 @@ const Page = () => {
                 .then((res) => {
                     setPageData(page);
                     setMarkdown(res?.data.replaceAll('\r', ''));
-                    setOriginalMarkdown(res?.data.replaceAll('\r', ''));
+                    setHistory([res?.data.replaceAll('\r', '')]);
+                    setCurrentIndex(0);
                     setToc(getToc(res?.data.replaceAll('\r', '')));
                     document.title = `${page.name} | ReadVerse | Lumindrix`;
                 })
@@ -211,9 +243,7 @@ const Page = () => {
                         className={styles.editor}
                         ref={editorRef}
                         value={markdown}
-                        onChange={(e) => {
-                            setMarkdown(e.target.value);
-                        }}
+                        onChange={handleChange}
                         onScroll={handleEditorScroll}
                         onKeyDown={handleKeyDown}
                     />
