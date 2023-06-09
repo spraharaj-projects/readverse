@@ -202,10 +202,11 @@ const Page = () => {
                 handleUpload={handleUpload}
             />
 
-            <div className={styles.content} ref={editorRef}>
+            <div className={styles.content}>
                 {editable ? (
                     <textarea
                         className={styles.editor}
+                        ref={editorRef}
                         value={markdown}
                         onChange={(e) => {
                             setMarkdown(e.target.value);
